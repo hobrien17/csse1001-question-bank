@@ -19,7 +19,6 @@ function getJson(ext) {
 	$.ajax({
 		type: "GET",
 		url: JSON_URL + ext,
-		headers: {'Access-Control-Allow-Origin': JSON_URL},
 		dataType: "json",
 		success: callback,
 		error: function (err) {
