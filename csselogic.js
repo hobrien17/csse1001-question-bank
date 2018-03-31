@@ -17,8 +17,8 @@ String.Format = function (b) {
 };
 
 function get_json(ext) {
-	var url = JSON_URL + ext
-	http.get(url function(res) {
+	var url = JSON_URL + ext;
+	http.get(url, function(res) {
 		var body = '';
 		res.on('data', function(chunk) {
 			body += chunk;
@@ -27,7 +27,7 @@ function get_json(ext) {
 		res.on('end', function() {
 			var response = JSON.parse(body);
 			pythonCallback(response);
-		})
+		});
 	});
 }
 
