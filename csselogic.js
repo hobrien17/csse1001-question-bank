@@ -3,8 +3,7 @@ var ANSWER_FORMAT = '<input type="radio" name="q" value="a"> {0} <br>\n' +
 			        '<input type="radio" name="q" value="c"> {2} <br>\n' +
 			        '<input type="radio" name="q" value="d"> {3} <br>\n' +
 			        '<input type="radio" name="q" value="e"> {4} <br>\n';
-var JSON_URL = "https://python-question-gen.herokuapp.com"
-var qno;
+var JSON_URL = "https://python-question-gen.herokuapp.com";
 var question;
 
 String.Format = function (b) {
@@ -16,43 +15,37 @@ String.Format = function (b) {
     })
 };
 
-function get_json(ext) {
-	var url = JSON_URL + ext;
-	request.get(url, function(res) {
-		var body = '';
-		res.on('data', function(chunk) {
-			body += chunk;
-		});
-
-		res.on('end', function() {
-			var response = JSON.parse(body);
-			pythonCallback(response);
-		});
+function getJson(ext) {
+	$.ajax({
+		type: "GET",
+		url: JSON_URL + ext,
+		dataType: "json",
+		success: callback
 	});
 }
 
-function pythonCallback(response) {
-	console.log(response["question"])
+function callback(response) {
+	question = response;
+	populateQuestion();
+	$("#submit").show();
 }
 
 function nextQuestion() {
-	/*var index = qno;
-	while(index  == qno) {
-		qno = Math.floor(Math.random() * data.length);
-	}
-	question = data[qno];
-	populateQuestion();*/
+	$("#submit").hide()
+	$("#frm").hide()
+	$("#question").html("Loading question...")
+	getJson("/exp");
 }
 
 function populateQuestion() {
-	/*document.getElementById("question").innerHTML = question["question"];
-	//console.log(document.getElementById("frm").innerHtml);
-	document.getElementById("frm").innerHTML = String.Format(ANSWER_FORMAT, 
-		question["a"], question["b"], question["c"], question["d"], question["e"]);*/
+	$("#question").html(question["question"]);
+	$("#frm").html(String.Format(ANSWER_FORMAT, 
+		question["a"], question["b"], question["c"], question["d"], question["e"]));
+	$("#frm").show()
 }
 
 function pressBtn() {
-	/*var query = document.querySelector('input[name="q"]:checked');
+	var query = document.querySelector('input[name="q"]:checked');
 	var selected;
 	if(query == null) {
 		selected = null;
@@ -64,7 +57,11 @@ function pressBtn() {
 	} else {
 		alert("Sorry, the correct answer was actually " + question[question["ans"]]);
 	}
-	nextQuestion();*/
+	nextQuestion();
 }
 
-window.onload = get_json("/exp");
+function load() {
+	$("#submit").hide();
+}
+
+window.onload = load;
