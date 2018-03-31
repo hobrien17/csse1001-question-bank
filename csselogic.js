@@ -18,7 +18,7 @@ String.Format = function (b) {
 
 function get_json(ext) {
 	var url = JSON_URL + ext;
-	http.get(url, function(res) {
+	request.get(url, function(res) {
 		var body = '';
 		res.on('data', function(chunk) {
 			body += chunk;
