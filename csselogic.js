@@ -3,6 +3,7 @@ var ANSWER_FORMAT = '<input type="radio" name="q" value="a"> {0} <br>\n' +
 			        '<input type="radio" name="q" value="c"> {2} <br>\n' +
 			        '<input type="radio" name="q" value="d"> {3} <br>\n' +
 			        '<input type="radio" name="q" value="e"> {4} <br>\n';
+var JSON_URL = "https://python-question-gen.herokuapp.com"
 var qno;
 var question;
 
@@ -15,12 +16,18 @@ String.Format = function (b) {
     })
 };
 
-function python() {
-	$.ajax({
-		type: "GET",
-		url: "https://python-question-gen.herokuapp.com/exp",
-		dataType: "json",
-		success: pythonCallback
+function get_json(ext) {
+	var url = JSON_URL + ext
+	http.get(url function(res) {
+		var body = '';
+		res.on('data', function(chunk) {
+			body += chunk;
+		});
+
+		res.on('end', function() {
+			var response = JSON.parse(body);
+			pythonCallback(response);
+		})
 	});
 }
 
@@ -60,4 +67,4 @@ function pressBtn() {
 	nextQuestion();*/
 }
 
-window.onload = python();
+window.onload = get_json("/exp");
