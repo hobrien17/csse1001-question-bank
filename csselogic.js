@@ -15,7 +15,7 @@ String.Format = function (b) {
     })
 };
 
-function python(input) {
+function python() {
 	$.ajax({
 		type: "GET",
 		url: "https://python-question-gen.herokuapp.com/exp",
@@ -29,23 +29,23 @@ function pythonCallback(response) {
 }
 
 function nextQuestion() {
-	var index = qno;
+	/*var index = qno;
 	while(index  == qno) {
 		qno = Math.floor(Math.random() * data.length);
 	}
 	question = data[qno];
-	populateQuestion();
+	populateQuestion();*/
 }
 
 function populateQuestion() {
-	document.getElementById("question").innerHTML = question["question"];
+	/*document.getElementById("question").innerHTML = question["question"];
 	//console.log(document.getElementById("frm").innerHtml);
 	document.getElementById("frm").innerHTML = String.Format(ANSWER_FORMAT, 
-		question["a"], question["b"], question["c"], question["d"], question["e"]);
+		question["a"], question["b"], question["c"], question["d"], question["e"]);*/
 }
 
 function pressBtn() {
-	var query = document.querySelector('input[name="q"]:checked');
+	/*var query = document.querySelector('input[name="q"]:checked');
 	var selected;
 	if(query == null) {
 		selected = null;
@@ -57,7 +57,7 @@ function pressBtn() {
 	} else {
 		alert("Sorry, the correct answer was actually " + question[question["ans"]]);
 	}
-	nextQuestion();
+	nextQuestion();*/
 }
 
-window.onload = python("hello");
+window.onload = python();
