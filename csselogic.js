@@ -20,7 +20,10 @@ function getJson(ext) {
 		type: "GET",
 		url: JSON_URL + ext,
 		dataType: "json",
-		success: callback
+		success: callback,
+		error: function (err) {
+			alert("AJAX error in request: " + JSON.stringify(err, null, 2));
+		}
 	});
 }
 
