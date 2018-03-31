@@ -19,7 +19,7 @@ function python() {
 	$.ajax({
 		type: "GET",
 		url: "https://python-question-gen.herokuapp.com/exp",
-		dataType: "jsonp",
+		dataType: "json",
 		success: pythonCallback
 	});
 }
