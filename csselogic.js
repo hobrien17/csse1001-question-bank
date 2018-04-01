@@ -37,7 +37,12 @@ function nextQuestion() {
 	$("#submit").hide()
 	$("#frm").hide()
 	$("#question").html("Loading question...")
-	getJson("/exp");
+	var i = Math.floor(Math.random()*2)
+	if (i == 0) {
+		getJson("/exp");
+	} else if (i == 1) {
+		getJson("/slice");
+	}
 }
 
 function populateQuestion() {
