@@ -48,7 +48,7 @@ function nextQuestion() {
 }
 
 function populateQuestion() {
-	$("#question").html(question["question"]);
+	$("#question").html(question["question"]replace(/(?:\r\n|\r|\n)/g, '<br />'));
 	$("#frm").html(String.Format(ANSWER_FORMAT, 
 		question["a"], question["b"], question["c"], question["d"], question["e"]));
 	$("#frm").show()
