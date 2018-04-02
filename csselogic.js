@@ -48,7 +48,8 @@ function nextQuestion() {
 }
 
 function populateQuestion() {
-	$("#question").html(question["question"].replace(/(?:\r\n|\r|\n)/g, '<br />').replace(' ', '&nbsp;'));
+	var question_text = question["question"].replace(/(?:\r\n|\r|\n)/g, '<br />').replace(/\t/g, '&nbsp;&nbsp;&nbsp;&nbsp;')
+	$("#question").html(question_text);
 	$("#frm").html(String.Format(ANSWER_FORMAT, 
 		question["a"], question["b"], question["c"], question["d"], question["e"]));
 	$("#frm").show()
