@@ -37,11 +37,13 @@ function nextQuestion() {
 	$("#submit").hide()
 	$("#frm").hide()
 	$("#question").html("Loading question...")
-	var i = Math.floor(Math.random()*2)
+	var i = Math.floor(Math.random()*3)
 	if (i == 0) {
 		getJson("/exp");
 	} else if (i == 1) {
 		getJson("/slice");
+	} else if (i == 2) {
+		getJson("/list");
 	}
 }
 
