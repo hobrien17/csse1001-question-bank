@@ -54,12 +54,12 @@ function populateQuestion() {
 function pressBtn() {
 	var query = $('input[name="q"]:checked');
 	var selected;
-	if(query == null) {
+	if(query === null) {
 		selected = null;
 	} else {
 		selected = query.value;
 	}
-	if(selected == question["ans"]) {
+	if(selected === question["ans"]) {
 		alert("Correct!");
 	} else {
 		alert("Sorry, the correct answer was actually " + question[question["ans"]]);
