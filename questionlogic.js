@@ -4,6 +4,8 @@ var ANSWER_FORMAT = '<input type="radio" name="q" value="a"> {0} <br>\n' +
 			        '<input type="radio" name="q" value="d"> {3} <br>\n' +
 			        '<input type="radio" name="q" value="e"> {4} <br>\n';
 var JSON_URL = "https://python-question-gen.herokuapp.com";
+var QUESTION_TYPES = ["exp", "slice", "list", "str", "dict"]
+var chosen;
 var question;
 
 String.Format = function (b) {
@@ -37,16 +39,8 @@ function nextQuestion() {
 	$("#submit").hide()
 	$("#frm").hide()
 	$("#question").html("Loading question...")
-	var i = Math.floor(Math.random()*4)
-	if (i == 0) {
-		getJson("/exp");
-	} else if (i == 1) {
-		getJson("/slice");
-	} else if (i == 2) {
-		getJson("/list");
-	} else if (i == 3) {
-		getJson("/str");
-	}
+	var i = Math.floor(Math.random()*chosen.length)
+	getJson("/" + chosen[i])
 }
 
 function populateQuestion() {
@@ -58,7 +52,7 @@ function populateQuestion() {
 }
 
 function pressBtn() {
-	var query = document.querySelector('input[name="q"]:checked');
+	var query = $('input[name="q"]:checked');
 	var selected;
 	if(query == null) {
 		selected = null;
@@ -73,8 +67,32 @@ function pressBtn() {
 	nextQuestion();
 }
 
-function load() {
-	$("#submit").hide();
+function populateSelected() {
+	var match,
+		pl = /\+/g,
+		search = /([^&=]+)=?([^&]*)/g,
+		decode = function(s) { return decodeURIComponent(s.replace(pl, " ")); },
+		query = window.location.search.substring(1);
+
+	chosen = [];
+	while(match = search.exec(query)) {
+		type = decode(match[1])
+		if($.inArray(type, QUESTION_TYPES) > -1) {
+			chosen.push(type)
+		}
+	}
+
+	if(chosen.length === 0) {
+		$("#submit").hide()
+		$("#refresh").hide()
+		$("#question").html("Question could not be loaded due to an invalid URL")
+	} else {
+		nextQuestion();
+	}
 }
 
-window.onload = load;
+function toMenu() {
+	window.location.replace("./menu.html")
+}
+
+window.onload = populateSelected;
