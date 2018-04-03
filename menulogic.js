@@ -5,7 +5,7 @@ function submit() {
 		if(params != "?") {
 			params += "&"
 		}
-		params += query[i].value
+		params += query[i].val()
 	}
 	if(params === "?") {
 		alert("Please select at least one topic");

@@ -57,8 +57,9 @@ function pressBtn() {
 	if(query === null) {
 		selected = null;
 	} else {
-		selected = query.value;
+		selected = query.val();
 	}
+	console.log(selected);
 	if(selected === question["ans"]) {
 		alert("Correct!");
 	} else {
