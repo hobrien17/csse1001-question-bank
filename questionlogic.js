@@ -4,7 +4,7 @@ var ANSWER_FORMAT = '<input type="radio" name="q" value="a"> {0} <br>\n' +
 			        '<input type="radio" name="q" value="d"> {3} <br>\n' +
 			        '<input type="radio" name="q" value="e"> {4} <br>\n';
 var JSON_URL = "https://python-question-gen.herokuapp.com";
-var QUESTION_TYPES = ["exp", "slice", "list", "str", "dict"]
+var QUESTION_TYPES = ["exp", "slice", "list", "str", "dict", "class"]
 var chosen;
 var question;
 
